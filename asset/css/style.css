@@ -1,0 +1,17 @@
+.tombol1{
+    margin-top: 180px;
+    /* display: block; */
+}
+
+.tombol1 a{
+    margin: auto;
+    display: block;
+    width: 150px;
+}
+
+.search{
+
+    width: 70%;
+    margin: auto;
+    margin-top: 100px;
+}
