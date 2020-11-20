@@ -25,11 +25,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tentangkami.php">Tentang Kami</a>
+                    <a class="nav-link active" href="#">Tentang kami</a>
                 </li>
+
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown
@@ -40,8 +41,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li> -->
             </ul>
@@ -50,12 +51,11 @@
     </nav>
 
     <div class="container text-center">
-        <div class="tombol1">
-
-            <a href="ceksiswa.php" class="btn btn-primary mt-2">Siswa</a>
-            <a href="" class="btn btn-success mt-2">Guru</a>
-            <a href="" class="btn btn-warning mt-2">Tamu</a>
-
+        <div class="card mt-5" style="width: 18rem;">
+            <img src="../asset/img/cr7.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
         </div>
     </div>
 

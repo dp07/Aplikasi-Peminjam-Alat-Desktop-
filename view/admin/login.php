@@ -1,3 +1,34 @@
+<?php
+require '../function.php';
+session_start();
+
+// cek apakah sudah login
+if (isset($_SESSION['username'])) {
+    header('Location: index.php');
+}
+
+// set error
+$err = 0;
+if (isset($_POST['login'])) {
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // cek username dan password
+    if ($username == 'admin' && $password == '123') {
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+
+        echo "<script>
+            document.location.href = 'index.php';
+        </script>";
+        exit();
+    } else {
+        $err = 1;
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -7,12 +38,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../asset/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../asset/css/bootstrap.min.css">
 
     <!-- My Style -->
-    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../../asset/css/style.css">
 
-    <title>Selamat Datang</title>
+    <title>Halaman Login</title>
 </head>
 
 <body>
@@ -25,11 +56,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tentangkami.php">Tentang Kami</a>
+                    <a class="nav-link" href="#">Tentang kami</a>
                 </li>
+
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown
@@ -40,30 +72,43 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li> -->
             </ul>
-            <a class="nav-link btn btn-sm btn-primary" href="admin/login.php">Login</a>
         </div>
     </nav>
 
-    <div class="container text-center">
-        <div class="tombol1">
-
-            <a href="ceksiswa.php" class="btn btn-primary mt-2">Siswa</a>
-            <a href="" class="btn btn-success mt-2">Guru</a>
-            <a href="" class="btn btn-warning mt-2">Tamu</a>
-
+    <div class="container">
+        <div class="form-login w-50 mx-auto mt-5">
+            <?php
+            if ($err == 1) {
+                echo '<div class="alert alert-danger" role="alert">
+                Username atau Password Salah!!!
+              </div>';
+            }
+            ?>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Masukan username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Masukan password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" name="login">Masuk</button>
+            </form>
         </div>
+
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="../asset/js/jquery-3.5.1.slim.min.js"></script>
-    <script src="../asset/js/bootstrap.bundle.min.js"></script>
+    <script src="../../asset/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="../../asset/js/bootstrap.bundle.min.js"></script>
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

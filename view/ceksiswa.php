@@ -25,10 +25,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="Index.php">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tentang Kami</a>
+                    <a class="nav-link" href="tentangkami.php">Tentang Kami</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,17 +45,14 @@
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li> -->
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <a class="nav-link btn btn-sm btn-primary" href="admin/login.php">Login</a>
         </div>
     </nav>
 
     <div class="container text-center">
         <div class="search">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Masukan NIS" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" class="form-control" placeholder="Masukan NIS" aria-label="Recipient's username" aria-describedby="button-addon2" autofocus>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="button" id="button-addon2">Cari</button>
                 </div>
