@@ -53,23 +53,8 @@ if (isset($_POST["tsiswa"])) {
                     <a class="nav-link active" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tentang kami</a>
+                    <a class="nav-link" href="tentangkami.php">Tentang kami</a>
                 </li>
-
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li> -->
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li> -->
             </ul>
             <a class="nav-link" href="logout.php" onclick="confirm('Apakah anda yakin?');">Logout</a>
         </div>
@@ -91,12 +76,7 @@ if (isset($_POST["tsiswa"])) {
                         <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
                         </li>
-                        <li class="list-group-item">Vestibulum at eros</li>
                     </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
                 </div>
             </div>
             <div class="col-9">
@@ -105,18 +85,18 @@ if (isset($_POST["tsiswa"])) {
                     <?php
                     if ($err == 1) {
                         echo '<div class="alert alert-danger" role="alert">
-                            Username atau Password Salah!!!
+                            Data gagal ditambahkan!!!
                         </div>';
                     }
                     ?>
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="nis">NIS</label>
-                            <input type="text" class="form-control" id="nis" placeholder="Masukan NIS" name="nis">
+                            <input type="text" class="form-control" id="nis" placeholder="Masukan NIS" name="nis" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Masukan nama" name="nama">
+                            <input type="text" class="form-control" id="nama" placeholder="Masukan nama" name="nama" required>
                         </div>
                         <div class="form-group">
                             <label for="kelas">Kelas</label>
@@ -124,13 +104,13 @@ if (isset($_POST["tsiswa"])) {
                         </div>
                         <div class="form-group">
                             <label for="angkatan">Angkatan</label>
-                            <input type="date" class="form-control" id="angkatan" placeholder="Masukan angkatan" name="angkatan">
+                            <input type="date" class="form-control" id="angkatan" placeholder="Masukan angkatan" name="angkatan" required>
                         </div>
                         <div class="form-group">
                             <label for="hp">HP</label>
-                            <input type="number" class="form-control" id="hp" placeholder="Masukan hp" name="hp">
+                            <input type="number" class="form-control" id="hp" placeholder="Masukan hp" name="hp" required>
                         </div>
-                        <button type="submit" class="btn btn-sm btn-primary" name="tsiswa">Kirim</button>
+                        <button type="submit" class="btn btn-primary" name="tsiswa">Kirim</button>
                     </form>
                 </div>
             </div>

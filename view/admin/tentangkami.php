@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../asset/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../asset/css/bootstrap.min.css">
 
     <!-- My Style -->
-    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../../asset/css/style.css">
 
     <title>Selamat Datang</title>
 </head>
@@ -28,7 +28,7 @@
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Tentang Kami</a>
+                    <a class="nav-link active" href="#">Tentang kami</a>
                 </li>
 
                 <!-- <li class="nav-item dropdown">
@@ -46,13 +46,13 @@
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li> -->
             </ul>
-            <a class="nav-link btn btn-sm btn-primary" href="admin/login.php">Login</a>
+            <a class="nav-link btn btn-sm btn-primary" href="logout.php">Logout</a>
         </div>
     </nav>
 
     <div class="container text-center">
         <div class="card mt-5" style="width: 18rem;">
-            <img src="../asset/img/cr7.jpeg" class="card-img-top" alt="...">
+            <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
@@ -62,8 +62,8 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="../asset/js/jquery-3.5.1.slim.min.js"></script>
-    <script src="../asset/js/bootstrap.bundle.min.js"></script>
+    <script src="../../asset/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="../../asset/js/bootstrap.bundle.min.js"></script>
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -7,8 +7,26 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php');
 }
 
-// jumlah siswa
-$jmlSiswa = jumlahDataSiswa();
+// tangkap id dari url
+$id = $_GET['id'];
+
+// cari siswa berdasarkan id
+$siswa = getSiswaById($id);
+
+// set error
+$err = 0;
+
+// cek apakah data berhasil di insert
+if (isset($_POST["esiswa"])) {
+    if (editSiswa($_POST) > 0) {
+        echo "<script>
+            alert('Data siswa berhasil diubah');
+            document.location.href = 'user.php';
+        </script>";
+    } else {
+        $err = 1;
+    }
+}
 
 ?>
 <!doctype html>
@@ -41,10 +59,10 @@ $jmlSiswa = jumlahDataSiswa();
                     <a class="nav-link active" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tentangkami.php">Tentang Kami</a>
+                    <a class="nav-link" href="tentangkami.php">Tentang kami</a>
                 </li>
             </ul>
-            <a class="nav-link" href="logout.php" onclick="return confirm('Apakah anda yakin?');">Logout</a>
+            <a class="nav-link" href="logout.php" onclick="confirm('Apakah anda yakin?');">Logout</a>
         </div>
     </nav>
 
@@ -64,43 +82,50 @@ $jmlSiswa = jumlahDataSiswa();
                         <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
                         </li>
-                        <li class=" list-group-item">
-                            <a href="alat.php">Peminjaman</a>
-                        </li>
-
+                        <li class="list-group-item">Vestibulum at eros</li>
                     </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
                 </div>
             </div>
             <div class="col-9">
-
-                <div class="card d-inline-block ml-4" style="width: 18rem;">
-                    <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Siswa</h5>
-                        <p class="card-text">Jumlah: <?= $jmlSiswa; ?></p>
-                        <a href="user.php" class="btn btn-primary">Lihat Detail</a>
-                    </div>
-                </div>
-
-                <div class="card d-inline-block ml-4" style="width: 18rem;">
-                    <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Alat</h5>
-                        <p class="card-text">Jumlah: 20</p>
-                        <a href="#" class="btn btn-primary">Lihat Detail</a>
-                    </div>
-                </div>
-
-                <div class="card d-inline-block ml-4 mt-3" style="width: 18rem;">
-                    <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Jumlah: 100</p>
-                        <a href="#" class="btn btn-primary">Lihat Detail</a>
-                    </div>
+                <div class="pl-4">
+                    <h5>Tambah Data Siswa</h5>
+                    <?php
+                    if ($err == 1) {
+                        echo '<div class="alert alert-danger" role="alert">
+                            Data gagal diubah!!!
+                        </div>';
+                    }
+                    ?>
+                    <form action="" method="post">
+                        <input type="hidden" name="id" value="<?= $siswa['id']; ?>">
+                        <div class="form-group">
+                            <label for="nis">NIS</label>
+                            <input type="text" class="form-control" id="nis" placeholder="Masukan NIS" name="nis" required autofocus value="<?= $siswa['nis']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Nama</label>
+                            <input type="text" class="form-control" id="nama" placeholder="Masukan nama" name="nama" required value="<?= $siswa['nama']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="kelas">Kelas</label>
+                            <input type="text" class="form-control" id="kelas" placeholder="Masukan kelas" name="kelas" value="<?= $siswa['kelas']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="angkatan">Angkatan</label>
+                            <input type="date" class="form-control" id="angkatan" placeholder="Masukan angkatan" name="angkatan" required value="<?= $siswa['angkatan']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="hp">HP</label>
+                            <input type="number" class="form-control" id="hp" placeholder="Masukan hp" name="hp" required value="<?= $siswa['hp']; ?>">
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="esiswa">Kirim</button>
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
     </div>
