@@ -1,5 +1,6 @@
 <?php
 require 'function.php';
+session_start();
 
 // set hasil
 $hasil = 0;
@@ -11,6 +12,9 @@ $err = 0;
 if (isset($_POST['cari'])) {
     $siswa = cariSiswaByNis($_POST['nis']);
     if ($siswa != null) {
+        $_SESSION['nis'] = $siswa['nis'];
+        $_SESSION['nama'] = $siswa['nama'];
+        $_SESSION['kelas'] = $siswa['kelas'];
         $hasil = 1;
     } else {
         $err = 1;
@@ -52,7 +56,7 @@ if (isset($_POST['cari'])) {
                     <a class="nav-link" href="tentangkami.php">Tentang Kami</a>
                 </li>
             </ul>
-            <a class="nav-link btn btn-sm btn-primary" href="admin/login.php">Login</a>
+            <a class="nav-link" href="admin/login.php">Login</a>
         </div>
     </nav>
 
@@ -61,7 +65,7 @@ if (isset($_POST['cari'])) {
             <div class="search">
                 <form action="" method="POST">
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Masukan NIS" name="nis" autofocus>
+                        <input type="text" class="form-control" placeholder="Masukan NIS" name="nis" autofocus autocomplete="off">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="submit" id="button-addon2" name="cari">Cari</button>
                         </div>
@@ -100,7 +104,12 @@ if (isset($_POST['cari'])) {
                     </tbody>
                 </table>
                 <!-- </div> -->
-                <a href="daftaralat.php" class="btn btn-primary float-right">Selanjutnya</a>
+                <?php if ($_GET['status']) : ?>
+                    <?php $_SESSION['status'] = $_GET['status']; ?>
+                    <a href="daftaralat2.php" class="btn btn-success float-right">Selanjutnya</a>
+                <?php else : ?>
+                    <a href="daftaralat.php" class="btn btn-primary float-right">Selanjutnya</a>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>

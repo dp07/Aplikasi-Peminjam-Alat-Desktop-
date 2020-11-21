@@ -7,11 +7,20 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php');
 }
 
-// jumlah siswa
-$jmlSiswa = jumlahDataSiswa();
+// set error
+$err = 0;
 
-// jumlah alat
-$jmlAlat = jumlahDataAlat();
+// cek apakah data berhasil di insert
+if (isset($_POST["talat"])) {
+    if (tambahAlat($_POST) > 0) {
+        echo "<script>
+            alert('Data siswa berhasil ditambahakan');
+            document.location.href = 'alat.php';
+        </script>";
+    } else {
+        $err = 1;
+    }
+}
 
 ?>
 <!doctype html>
@@ -44,10 +53,10 @@ $jmlAlat = jumlahDataAlat();
                     <a class="nav-link active" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tentangkami.php">Tentang Kami</a>
+                    <a class="nav-link" href="tentangkami.php">Tentang kami</a>
                 </li>
             </ul>
-            <a class="nav-link" href="logout.php" onclick="return confirm('Apakah anda yakin?');">Logout</a>
+            <a class="nav-link" href="logout.php" onclick="confirm('Apakah anda yakin?');">Logout</a>
         </div>
     </nav>
 
@@ -68,42 +77,38 @@ $jmlAlat = jumlahDataAlat();
                             <a href="alat.php">Alat</a>
                         </li>
                         <li class=" list-group-item">
-                            <a href="#">Peminjaman</a>
+                            <a href="alat.php">Peminjaman</a>
                         </li>
-
                     </ul>
                 </div>
             </div>
             <div class="col-9">
-
-                <div class="card d-inline-block ml-4" style="width: 18rem;">
-                    <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Users</h5>
-                        <p class="card-text">Jumlah: <?= $jmlSiswa; ?></p>
-                        <a href="user.php" class="btn btn-primary">Lihat Detail</a>
-                    </div>
-                </div>
-
-                <div class="card d-inline-block ml-4" style="width: 18rem;">
-                    <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Alat</h5>
-                        <p class="card-text">Jumlah: <?= $jmlAlat; ?></p>
-                        <a href="alat.php" class="btn btn-primary">Lihat Detail</a>
-                    </div>
-                </div>
-
-                <div class="card d-inline-block ml-4 mt-3" style="width: 18rem;">
-                    <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Peminjaman</h5>
-                        <p class="card-text">Jumlah: 100</p>
-                        <a href="#" class="btn btn-primary">Lihat Detail</a>
-                    </div>
+                <div class="pl-4">
+                    <h5>Tambah Data Siswa</h5>
+                    <?php
+                    if ($err == 1) {
+                        echo '<div class="alert alert-danger" role="alert">
+                            Data gagal ditambahkan!!!
+                        </div>';
+                    }
+                    ?>
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="kode_alat">Kode Alat</label>
+                            <input type="text" class="form-control" id="kode_alat" placeholder="Masukan kode alat" name="kode_alat" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_alat">Nama Alat</label>
+                            <input type="text" class="form-control" id="nama_alat" placeholder="Masukan nama alat" name="nama_alat" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jumlah">Jumlah</label>
+                            <input type="number" class="form-control" id="jumlah" placeholder="Masukan jumlah" name="jumlah">
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="talat">Kirim</button>
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
     </div>

@@ -8,16 +8,16 @@ if (!isset($_SESSION['username'])) {
 }
 
 $jmlDataPerHalaman = 10;
-$jmlDataSiswa = jumlahDataSiswa();
+$jmlDataSiswa = jumlahDataAlat();
 $jmlHalaman = ceil($jmlDataSiswa / $jmlDataPerHalaman);
 $halamanAktif = (isset($_GET['hal'])) ? $_GET['hal'] : 1;
 $awalData = ($jmlDataPerHalaman * $halamanAktif) - $jmlDataPerHalaman;
 
-$siswa = siswa($awalData, $jmlDataPerHalaman);
+$alat = alat($awalData, $jmlDataPerHalaman);
 
 // cari berdasarkan keyword
 if (isset($_POST['cari'])) {
-    $siswa = cariSiswa($_POST['keyword']);
+    $alat = cariAlat($_POST['keyword']);
 }
 ?>
 <!doctype html>
@@ -34,7 +34,7 @@ if (isset($_POST['cari'])) {
     <!-- My Style -->
     <link rel="stylesheet" href="../../asset/css/style.css">
 
-    <title>Halaman User</title>
+    <title>Halaman Alat</title>
 </head>
 
 <body>
@@ -73,16 +73,18 @@ if (isset($_POST['cari'])) {
                         <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
                         </li>
-
+                        <li class=" list-group-item">
+                            <a href="alat.php">Peminjaman</a>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="col-9">
                 <div class="pl-4">
-                    <h5>Daftar User</h5>
+                    <h5>Daftar Alat</h5>
                     <div class="row">
                         <div class="col">
-                            <a href="tambahsiswa.php" class="btn btn-primary">Tambah Data</a>
+                            <a href="tambahalat.php" class="btn btn-primary">Tambah Data</a>
                         </div>
                         <div class="col">
                             <form action="" method="POST">
@@ -100,27 +102,23 @@ if (isset($_POST['cari'])) {
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">NIS</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Kelas</th>
-                                <th scope="col">Angkatan</th>
-                                <th scope="col">HP</th>
+                                <th scope="col">Kode Alat</th>
+                                <th scope="col">Nama Alat</th>
+                                <th scope="col">Jumlah</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = $awalData + 1; ?>
-                            <?php while ($row = mysqli_fetch_assoc($siswa)) : ?>
+                            <?php while ($row = mysqli_fetch_assoc($alat)) : ?>
                                 <tr>
                                     <th scope="row"><?= $i++; ?></th>
-                                    <td><?= $row['nis']; ?></td>
-                                    <td><?= $row['nama']; ?></td>
-                                    <td><?= $row['kelas']; ?></td>
-                                    <td><?= $row['angkatan']; ?></td>
-                                    <td><?= $row['hp']; ?></td>
+                                    <td><?= $row['kode_alat']; ?></td>
+                                    <td><?= $row['nama_alat']; ?></td>
+                                    <td><?= $row['jumlah']; ?></td>
                                     <td>
-                                        <a href="editsiswa.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-success">Edit</a>
-                                        <a href="hapussiswa.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+                                        <a href="editalat.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="hapusalat.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

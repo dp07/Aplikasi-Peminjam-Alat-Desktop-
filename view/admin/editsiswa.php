@@ -82,12 +82,10 @@ if (isset($_POST["esiswa"])) {
                         <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
                         </li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        <li class=" list-group-item">
+                            <a href="alat.php">Peminjaman</a>
+                        </li>
                     </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
                 </div>
             </div>
             <div class="col-9">

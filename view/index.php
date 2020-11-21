@@ -31,14 +31,14 @@
                     <a class="nav-link" href="tentangkami.php">Tentang Kami</a>
                 </li>
             </ul>
-            <a class="nav-link btn btn-sm btn-primary" href="admin/login.php">Login</a>
+            <a class="nav-link" href="admin/login.php">Login</a>
         </div>
     </nav>
 
     <div class="container text-center">
         <div class="tombol1">
             <a href="peminjamanuser.php" class="btn btn-primary mt-2">Peminjaman</a>
-            <a href="" class="btn btn-primary mt-2">Pengembalian</a>
+            <a href="ceksiswa.php?status=pengembalian" class="btn btn-primary mt-2">Pengembalian</a>
         </div>
 
     </div>

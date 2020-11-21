@@ -76,6 +76,9 @@ if (isset($_POST["tsiswa"])) {
                         <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
                         </li>
+                        <li class=" list-group-item">
+                            <a href="alat.php">Peminjaman</a>
+                        </li>
                     </ul>
                 </div>
             </div>
