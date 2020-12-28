@@ -38,7 +38,7 @@
     <div class="container text-center">
         <div class="tombol1">
 
-            <a href="ceksiswa.php" class="btn btn-primary mt-2">Siswa</a>
+            <a href="ceksiswa.php?status=no" class="btn btn-primary mt-2">Siswa</a>
             <a href="" class="btn btn-success mt-2">Guru</a>
             <a href="" class="btn btn-warning mt-2">Tamu</a>
 

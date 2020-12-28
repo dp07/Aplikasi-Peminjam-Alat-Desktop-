@@ -104,7 +104,7 @@ if (isset($_POST['cari'])) {
                     </tbody>
                 </table>
                 <!-- </div> -->
-                <?php if ($_GET['status']) : ?>
+                <?php if ($_GET['status'] == 'pengembalian') : ?>
                     <?php $_SESSION['status'] = $_GET['status']; ?>
                     <a href="daftaralat2.php" class="btn btn-success float-right">Selanjutnya</a>
                 <?php else : ?>
