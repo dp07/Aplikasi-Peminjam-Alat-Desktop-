@@ -38,7 +38,7 @@
     <div class="container text-center">
         <div class="tombol1">
             <a href="peminjamanuser.php" class="btn btn-primary mt-2">Peminjaman</a>
-            <a href="ceksiswa.php?status=pengembalian" class="btn btn-primary mt-2">Pengembalian</a>
+            <a href="cekpengembalian.php?status=pengembalian" class="btn btn-primary mt-2">Pengembalian</a>
         </div>
 
     </div>

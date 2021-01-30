@@ -8,16 +8,16 @@ if (!isset($_SESSION['username'])) {
 }
 
 $jmlDataPerHalaman = 10;
-$jmlDataSiswa = jumlahDataAlat();
+$jmlDataSiswa = jumlahDataGuru();
 $jmlHalaman = ceil($jmlDataSiswa / $jmlDataPerHalaman);
 $halamanAktif = (isset($_GET['hal'])) ? $_GET['hal'] : 1;
 $awalData = ($jmlDataPerHalaman * $halamanAktif) - $jmlDataPerHalaman;
 
-$alat = alat($awalData, $jmlDataPerHalaman);
+$siswa = guru($awalData, $jmlDataPerHalaman);
 
 // cari berdasarkan keyword
 if (isset($_POST['cari'])) {
-    $alat = cariAlat($_POST['keyword']);
+    $siswa = cariGuru($_POST['keyword']);
 }
 ?>
 <!doctype html>
@@ -34,7 +34,7 @@ if (isset($_POST['cari'])) {
     <!-- My Style -->
     <link rel="stylesheet" href="../../asset/css/style.css">
 
-    <title>Halaman Alat</title>
+    <title>Halaman User</title>
 </head>
 
 <body>
@@ -70,24 +70,24 @@ if (isset($_POST['cari'])) {
                         <li class="list-group-item">
                             <a href="user.php">User</a>
                         </li>
-                        <li class=" list-group-item">
+                        <li class="list-group-item">
                             <a href="guru.php">Guru</a>
                         </li>
                         <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
                         </li>
                         <li class=" list-group-item">
-                            <a href="peminjaman.php">Peminjaman</a>
+                            <a href="alat.php">Peminjaman</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-9">
                 <div class="pl-4">
-                    <h5>Daftar Alat</h5>
+                    <h5>Daftar Guru</h5>
                     <div class="row">
                         <div class="col">
-                            <a href="tambahalat.php" class="btn btn-primary">Tambah Data</a>
+                            <a href="tambahguru.php" class="btn btn-primary">Tambah Data</a>
                         </div>
                         <div class="col">
                             <form action="" method="POST">
@@ -105,23 +105,27 @@ if (isset($_POST['cari'])) {
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Kode Alat</th>
-                                <th scope="col">Nama Alat</th>
-                                <th scope="col">Jumlah</th>
+                                <th scope="col">NIP</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Tahun Masuk</th>
+                                <th scope="col">HP</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = $awalData + 1; ?>
-                            <?php while ($row = mysqli_fetch_assoc($alat)) : ?>
+                            <?php while ($row = mysqli_fetch_assoc($siswa)) : ?>
                                 <tr>
                                     <th scope="row"><?= $i++; ?></th>
-                                    <td><?= $row['kode_alat']; ?></td>
-                                    <td><?= $row['nama_alat']; ?></td>
-                                    <td><?= $row['jumlah']; ?></td>
+                                    <td><?= $row['nis']; ?></td>
+                                    <td><?= $row['nama']; ?></td>
+                                    <td><?= $row['kelas']; ?></td>
+                                    <td><?= $row['angkatan']; ?></td>
+                                    <td><?= $row['hp']; ?></td>
                                     <td>
-                                        <a href="editalat.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-success">Edit</a>
-                                        <a href="hapusalat.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+                                        <a href="editguru.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="hapusguru.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

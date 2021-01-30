@@ -8,16 +8,16 @@ if (!isset($_SESSION['username'])) {
 }
 
 $jmlDataPerHalaman = 10;
-$jmlDataSiswa = jumlahDataSiswa();
+$jmlDataSiswa = jumlahDataAlatDipinjman();
 $jmlHalaman = ceil($jmlDataSiswa / $jmlDataPerHalaman);
 $halamanAktif = (isset($_GET['hal'])) ? $_GET['hal'] : 1;
 $awalData = ($jmlDataPerHalaman * $halamanAktif) - $jmlDataPerHalaman;
 
-$siswa = siswa($awalData, $jmlDataPerHalaman);
+$siswa = daftarPeminjamanAdmin($awalData, $jmlDataPerHalaman);
 
 // cari berdasarkan keyword
 if (isset($_POST['cari'])) {
-    $siswa = cariSiswa($_POST['keyword']);
+    $siswa = cariDaftarAlatDipinjam($_POST['keyword']);
 }
 ?>
 <!doctype html>
@@ -71,7 +71,13 @@ if (isset($_POST['cari'])) {
                             <a href="user.php">User</a>
                         </li>
                         <li class=" list-group-item">
+                            <a href="guru.php">Guru</a>
+                        </li>
+                        <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
+                        </li>
+                        <li class=" list-group-item">
+                            <a href="peminjaman.php">Peminjaman</a>
                         </li>
 
                     </ul>
@@ -79,10 +85,10 @@ if (isset($_POST['cari'])) {
             </div>
             <div class="col-9">
                 <div class="pl-4">
-                    <h5>Daftar User</h5>
+                    <h5>Daftar Alat Dipinjam</h5>
                     <div class="row">
                         <div class="col">
-                            <a href="tambahsiswa.php" class="btn btn-primary">Tambah Data</a>
+                            <!-- <a href="tambahsiswa.php" class="btn btn-primary">Tambah Data</a> -->
                         </div>
                         <div class="col">
                             <form action="" method="POST">
@@ -102,9 +108,9 @@ if (isset($_POST['cari'])) {
                                 <th scope="col">No</th>
                                 <th scope="col">NIS</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Kelas</th>
-                                <th scope="col">Angkatan</th>
-                                <th scope="col">HP</th>
+                                <th scope="col">Nama Alat</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Tanggal Pinjam</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -113,14 +119,13 @@ if (isset($_POST['cari'])) {
                             <?php while ($row = mysqli_fetch_assoc($siswa)) : ?>
                                 <tr>
                                     <th scope="row"><?= $i++; ?></th>
-                                    <td><?= $row['nis']; ?></td>
-                                    <td><?= $row['nama']; ?></td>
-                                    <td><?= $row['kelas']; ?></td>
-                                    <td><?= $row['angkatan']; ?></td>
-                                    <td><?= $row['hp']; ?></td>
+                                    <td><?= $row['nis_user']; ?></td>
+                                    <td><?= $row['nama_user']; ?></td>
+                                    <td><?= $row['nama_alat']; ?></td>
+                                    <td><?= $row['jumlah']; ?></td>
+                                    <td><?= $row['tanggal']; ?></td>
                                     <td>
-                                        <a href="editsiswa.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-success">Edit</a>
-                                        <a href="hapussiswa.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+                                        <a href="hapusdpadmin.php?id=<?= $row['id']; ?>&kode=<?= $row['kode_alat']; ?>" class="btn btn-sm btn-danger">Hapus</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

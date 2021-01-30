@@ -2,11 +2,83 @@
 // koneksi database
 $conn = mysqli_connect("localhost", "root", "", "peminjaman_alat");
 
+// tampilkan daftar peminjaman
+function daftarPeminjamanAdmin($awalData, $jmlDataPerHalaman)
+{
+    global $conn;
+    $siswa = mysqli_query($conn, "SELECT * FROM peminjaman GROUP BY id ORDER BY id DESC LIMIT $awalData, $jmlDataPerHalaman ");
+    // var_dump($siswa);
+    return $siswa;
+}
+
+// jumlah data alat dipinjam
+function jumlahDataAlatDipinjman()
+{
+    global $conn;
+
+    // hitung jumlah data peminjaman
+    $sql = "SELECT * FROM peminjaman";
+    $query = mysqli_query($conn, $sql);
+    return mysqli_affected_rows($conn);
+}
+
+// cari data alat dipinjam
+function cariDaftarAlatDipinjam($keyword)
+{
+    global $conn;
+
+    // cari data peminjman berdasarkan keyword
+    $sql = "SELECT * FROM peminjaman WHERE 
+            nis_user LIKE '%$keyword%' OR
+            nama_user LIKE '%$keyword%' OR
+            kode_alat LIKE '%$keyword%' OR
+            nama_alat LIKE '%$keyword%'";
+    $query = mysqli_query($conn, $sql);
+    return $query;
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// tampilkan guru
+function guru($awalData, $jmlDataPerHalaman)
+{
+    global $conn;
+    $siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE kelas='Guru' GROUP BY id ORDER BY id DESC LIMIT $awalData, $jmlDataPerHalaman ");
+    // var_dump($siswa);
+    return $siswa;
+}
+
+
+// cari guru
+function cariGuru($keyword)
+{
+    global $conn;
+
+    // cari siswa berdasarkan keyword
+    $sql = "SELECT * FROM siswa WHERE 
+            nis LIKE '%$keyword%' && kelas LIKE 'Guru' OR
+            nama LIKE '%$keyword%' && kelas LIKE 'Guru'";
+    $query = mysqli_query($conn, $sql);
+    return $query;
+}
+
+// jumlah data guru
+function jumlahDataGuru()
+{
+    global $conn;
+
+    // hitung jumlah data siswa
+    $sql = "SELECT * FROM siswa WHERE kelas='Guru'";
+    $query = mysqli_query($conn, $sql);
+    return mysqli_affected_rows($conn);
+}
+
+
+// -------------------------------------------------------------------------------------------------------------------
 // tampilkan user
 function siswa($awalData, $jmlDataPerHalaman)
 {
     global $conn;
-    $siswa = mysqli_query($conn, "SELECT * FROM siswa GROUP BY id ORDER BY id DESC LIMIT $awalData, $jmlDataPerHalaman ");
+    $siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE kelas!='Guru' GROUP BY id ORDER BY id DESC LIMIT $awalData, $jmlDataPerHalaman ");
     // var_dump($siswa);
     return $siswa;
 }
@@ -17,7 +89,7 @@ function jumlahDataSiswa()
     global $conn;
 
     // hitung jumlah data siswa
-    $sql = "SELECT * FROM siswa";
+    $sql = "SELECT * FROM siswa WHERE kelas!='Guru'";
     $query = mysqli_query($conn, $sql);
     return mysqli_affected_rows($conn);
 }
@@ -95,10 +167,10 @@ function cariSiswa($keyword)
 
     // cari siswa berdasarkan keyword
     $sql = "SELECT * FROM siswa WHERE 
-            nis LIKE '%$keyword%' OR
-            nama LIKE '%$keyword%' OR
-            kelas LIKE '%$keyword%' OR
-            angkatan LIKE '%$keyword%'";
+            nis LIKE '%$keyword%' && kelas!='Guru' OR
+            nama LIKE '%$keyword%' && kelas!='Guru' OR
+            kelas LIKE '%$keyword%' && kelas!='Guru' OR
+            angkatan LIKE '%$keyword%' && kelas!='Guru'";
     $query = mysqli_query($conn, $sql);
     return $query;
 }
@@ -110,7 +182,7 @@ function cariSiswaByNis($keyword)
 
     // cari siswa berdasarkan nis
     $sql = "SELECT * FROM siswa WHERE 
-            nis LIKE '$keyword'";
+            nis='$keyword'";
     $query = mysqli_query($conn, $sql);
     return mysqli_fetch_assoc($query);
 }
@@ -284,4 +356,35 @@ function hapusDaftarPinjam($id, $kode_alat)
     $sql = "DELETE FROM peminjaman WHERE id = $id";
     $query = mysqli_query($conn, $sql);
     return mysqli_affected_rows($conn);
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// tambah tamu
+function tambahTamu($data)
+{
+    global $conn;
+
+    // cek apakah password ada yang sama
+    $pass = $data['nis'];
+    $sql = "SELECT * FROM siswa WHERE nis=$pass";
+    mysqli_query($conn, $sql);
+    $hasil = mysqli_affected_rows($conn);
+    // var_dump($hasil);
+    // die($hasil);
+
+    if ($hasil == 0) {
+        // ambil data dari form
+        $nis = htmlspecialchars($data["nis"]);
+        $nama = htmlspecialchars($data["nama"]);
+        $kelas = htmlspecialchars($data["kelas"]);
+        $angkatan = htmlspecialchars($data["angkatan"]);
+        $hp = htmlspecialchars($data["hp"]);
+
+        // insert ke dalam database
+        $sql = "INSERT INTO siswa (nis, nama, kelas, angkatan, hp) VALUES ('$nis', '$nama', '$kelas', '$angkatan', '$hp')";
+        mysqli_query($conn, $sql);
+        return mysqli_affected_rows($conn);
+    } else {
+        return 0;
+    }
 }

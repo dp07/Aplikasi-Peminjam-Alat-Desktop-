@@ -7,21 +7,15 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php');
 }
 
-// tangkap id dari url
-$id = $_GET['id'];
-
-// cari siswa berdasarkan id
-$siswa = getSiswaById($id);
-
 // set error
 $err = 0;
 
 // cek apakah data berhasil di insert
-if (isset($_POST["esiswa"])) {
-    if (editSiswa($_POST) > 0) {
+if (isset($_POST["tsiswa"])) {
+    if (tambahSiswa($_POST) > 0) {
         echo "<script>
-            alert('Data siswa berhasil diubah');
-            document.location.href = 'user.php';
+            alert('Data Guru berhasil ditambahakan');
+            document.location.href = 'guru.php';
         </script>";
     } else {
         $err = 1;
@@ -86,44 +80,40 @@ if (isset($_POST["esiswa"])) {
                             <a href="alat.php">Alat</a>
                         </li>
                         <li class=" list-group-item">
-                            <a href="peminjaman.php">Peminjaman</a>
+                            <a href="alat.php">Peminjaman</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-9">
                 <div class="pl-4">
-                    <h5>Edit Data Siswa</h5>
+                    <h5>Tambah Data Guru</h5>
                     <?php
                     if ($err == 1) {
                         echo '<div class="alert alert-danger" role="alert">
-                            Data gagal diubah!!!
+                            Data gagal ditambahkan!!!
                         </div>';
                     }
                     ?>
                     <form action="" method="post">
-                        <input type="hidden" name="id" value="<?= $siswa['id']; ?>">
+                        <input type="hidden" name="kelas" id="kelas" value="Guru">
                         <div class="form-group">
-                            <label for="nis">NIS</label>
-                            <input type="text" class="form-control" id="nis" placeholder="Masukan NIS" name="nis" required autofocus value="<?= $siswa['nis']; ?>">
+                            <label for="nis">NIP</label>
+                            <input type="text" class="form-control" id="nis" placeholder="Masukan NIP" name="nis" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Masukan nama" name="nama" required value="<?= $siswa['nama']; ?>">
+                            <input type="text" class="form-control" id="nama" placeholder="Masukan nama" name="nama" required>
                         </div>
                         <div class="form-group">
-                            <label for="kelas">Kelas</label>
-                            <input type="text" class="form-control" id="kelas" placeholder="Masukan kelas" name="kelas" value="<?= $siswa['kelas']; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="angkatan">Angkatan</label>
-                            <input type="date" class="form-control" id="angkatan" placeholder="Masukan angkatan" name="angkatan" required value="<?= $siswa['angkatan']; ?>">
+                            <label for="angkatan">Tahun Masuk</label>
+                            <input type="date" class="form-control" id="angkatan" placeholder="Masukan angkatan" name="angkatan" required>
                         </div>
                         <div class="form-group">
                             <label for="hp">HP</label>
-                            <input type="number" class="form-control" id="hp" placeholder="Masukan hp" name="hp" required value="<?= $siswa['hp']; ?>">
+                            <input type="number" class="form-control" id="hp" placeholder="Masukan hp" name="hp" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="esiswa">Kirim</button>
+                        <button type="submit" class="btn btn-primary" name="tsiswa">Kirim</button>
                     </form>
                 </div>
             </div>

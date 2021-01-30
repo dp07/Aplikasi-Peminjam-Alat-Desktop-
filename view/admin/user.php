@@ -61,7 +61,7 @@ if (isset($_POST['cari'])) {
         <div class="row mt-3">
             <div class="col-3">
                 <div class="card" style="width: 18rem;">
-                    <img src="../../asset/img/cr7.jpeg" class="card-img-top" alt="...">
+                    <img src="../../asset/img/cr7.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Selamat datang Admin</h5>
                         <p class="card-text">Selamat bekerja, semangat ya!!!</p>
@@ -71,11 +71,15 @@ if (isset($_POST['cari'])) {
                             <a href="user.php">User</a>
                         </li>
                         <li class=" list-group-item">
+                            <a href="guru.php">Guru</a>
+                        </li>
+                        <li class=" list-group-item">
                             <a href="alat.php">Alat</a>
                         </li>
                         <li class=" list-group-item">
-                            <a href="alat.php">Peminjaman</a>
+                            <a href="peminjaman.php">Peminjaman</a>
                         </li>
+
                     </ul>
                 </div>
             </div>

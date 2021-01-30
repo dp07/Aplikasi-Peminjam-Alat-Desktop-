@@ -20,8 +20,8 @@ $err = 0;
 if (isset($_POST["esiswa"])) {
     if (editSiswa($_POST) > 0) {
         echo "<script>
-            alert('Data siswa berhasil diubah');
-            document.location.href = 'user.php';
+            alert('Data Guru berhasil diubah');
+            document.location.href = 'guru.php';
         </script>";
     } else {
         $err = 1;
@@ -93,7 +93,7 @@ if (isset($_POST["esiswa"])) {
             </div>
             <div class="col-9">
                 <div class="pl-4">
-                    <h5>Edit Data Siswa</h5>
+                    <h5>Edit Data Guru</h5>
                     <?php
                     if ($err == 1) {
                         echo '<div class="alert alert-danger" role="alert">
@@ -103,6 +103,7 @@ if (isset($_POST["esiswa"])) {
                     ?>
                     <form action="" method="post">
                         <input type="hidden" name="id" value="<?= $siswa['id']; ?>">
+                        <input type="hidden" name="kelas" value="<?= $siswa['kelas']; ?>">
                         <div class="form-group">
                             <label for="nis">NIS</label>
                             <input type="text" class="form-control" id="nis" placeholder="Masukan NIS" name="nis" required autofocus value="<?= $siswa['nis']; ?>">
@@ -113,7 +114,7 @@ if (isset($_POST["esiswa"])) {
                         </div>
                         <div class="form-group">
                             <label for="kelas">Kelas</label>
-                            <input type="text" class="form-control" id="kelas" placeholder="Masukan kelas" name="kelas" value="<?= $siswa['kelas']; ?>">
+                            <input type="text" class="form-control" id="kelas" placeholder="Masukan kelas" name="kelas" value="<?= $siswa['kelas']; ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label for="angkatan">Angkatan</label>
